@@ -31,7 +31,7 @@ RUN apt-get update
 RUN apt-get install -y mongodb-org
 
 # Copy mongod.conf to Docker (wit bindIp edited)
-COPY mongod.conf /etc/mongod.conf
+# COPY mongod.conf /etc/mongod.conf
 
 # Run the command on container startup and keep the container running as service
 CMD /usr/sbin/cron -f | service rsyslog restart
