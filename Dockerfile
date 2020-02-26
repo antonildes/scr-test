@@ -16,6 +16,9 @@ RUN apt-get -y install cron rsyslog
 # Copy R scripts to Docker 
 COPY learning_today.R /root/learning_today.R
 COPY function.R /root/function.R
+COPY learning_today.sh /root/learning_today.sh
+
+RUN chmod 0755 /root/learning_today.sh
 
 ### MongoDB ###
 # Import the public key used by the package management system:
