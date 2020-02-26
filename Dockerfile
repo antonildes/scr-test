@@ -36,7 +36,7 @@ WORKDIR /data
 EXPOSE 27017
 
 # Start mongo services for all IP's
-RUN mongod --bind_ip_all
+RUN nohup mongod --bind_ip_all &
 
 # Run the command on container startup and keep the container running as service
 CMD /usr/sbin/cron -f | service rsyslog restart
