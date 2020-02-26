@@ -19,9 +19,6 @@ RUN touch /var/log/cron.log
 RUN apt-get update && apt-get install -y gnupg2
 RUN apt-get -y install cron rsyslog
 
-# Run the command on container startup and keep the container running as service
-CMD /usr/sbin/cron -f | service rsyslog restart
-
 ### MongoDB ###
 # Import the public key used by the package management system:
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
@@ -38,8 +35,6 @@ RUN apt-get install -y mongodb-org
 VOLUME ["/data/db"]
  
 EXPOSE 27017
-
-CMD ["mongod", "--bind_ip_all"]
 
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
@@ -59,3 +54,8 @@ RUN apt-get update -qq \
 		mongolite \
     && R -e "install.packages('aws.sns', repos = c('cloudyr' = 'http://cloudyr.github.io/drat'))" \
     && R -e "install.packages('aws.s3', repos = c('cloudyr' = 'http://cloudyr.github.io/drat'))"
+
+# CMD ["mongod", "--bind_ip_all"]
+# Run the command on container startup and keep the container running as service
+CMD /usr/sbin/cron -f | service rsyslog restart && mongod --bind_ip_all
+
