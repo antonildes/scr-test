@@ -1,5 +1,11 @@
 FROM antonildes/tidyverse:latest
 
+# Copy R scripts to Docker 
+COPY learning_today.R /root/learning_today.R
+COPY function.R /root/function.R
+COPY learning_today.sh /root/learning_today.sh
+RUN chmod 0755 /root/learning_today.sh
+
 # Add crontab file in the cron directory
 ADD crontab /etc/cron.d/pense-sepse
 
@@ -13,12 +19,8 @@ RUN touch /var/log/cron.log
 RUN apt-get update && apt-get install -y gnupg2
 RUN apt-get -y install cron rsyslog
 
-# Copy R scripts to Docker 
-COPY learning_today.R /root/learning_today.R
-COPY function.R /root/function.R
-COPY learning_today.sh /root/learning_today.sh
-
-RUN chmod 0755 /root/learning_today.sh
+# Run the command on container startup and keep the container running as service
+CMD /usr/sbin/cron -f | service rsyslog restart
 
 ### MongoDB ###
 # Import the public key used by the package management system:
@@ -36,9 +38,6 @@ RUN apt-get install -y mongodb-org
 VOLUME ["/data/db"]
  
 EXPOSE 27017
-
-# Run the command on container startup and keep the container running as service
-CMD /usr/sbin/cron -f | service rsyslog restart
 
 CMD ["mongod", "--bind_ip_all"]
 
