@@ -30,6 +30,9 @@ RUN apt-get update
 # Install the MongoDB packages:
 RUN apt-get install -y mongodb-org
 
+# Stoping mongodb if it's running
+RUN service mongod stop
+
 # Copy mongod.conf to Docker (wit bindIp edited)
 COPY mongod.conf /etc/mongod.conf
 
