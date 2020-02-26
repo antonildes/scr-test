@@ -41,6 +41,8 @@ RUN nohup mongod --bind_ip_all &
 # Run the command on container startup and keep the container running as service
 CMD /usr/sbin/cron -f | service rsyslog restart
 
+CMD ["mongod", "--smallfiles"]
+
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
         lbzip2 \
