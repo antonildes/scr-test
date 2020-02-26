@@ -30,16 +30,13 @@ RUN apt-get update
 # Install the MongoDB packages:
 RUN apt-get install -y mongodb-org
 
-# Stoping mongodb if it's running
-# RUN service mongod stop
-
-# Copy mongod.conf to Docker (wit bindIp edited)
-COPY mongod.conf /etc/mongod.conf
-
 VOLUME ["/data/db"]
 WORKDIR /data
 
 EXPOSE 27017
+
+# Start mongo services for all IP's
+RUN mongod --bind_ip_all
 
 # Run the command on container startup and keep the container running as service
 CMD /usr/sbin/cron -f | service rsyslog restart
