@@ -30,6 +30,8 @@ RUN apt-get update
 # Install the MongoDB packages:
 RUN apt-get install -y mongodb-org
 
+VOLUME ["/data/db"]
+ 
 EXPOSE 27017
 
 # Run the command on container startup and keep the container running as service
