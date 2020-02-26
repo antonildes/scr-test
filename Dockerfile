@@ -10,7 +10,7 @@ RUN chmod 0755 /etc/cron.d/pense-sepse
 RUN touch /var/log/cron.log
 
 #Install Cron/ syslog for debugging my cron jobs
-RUN apt-get update
+RUN apt-get update && apt-get install -y gnupg2
 RUN apt-get -y install cron rsyslog
 
 # Copy R scripts to Docker 
