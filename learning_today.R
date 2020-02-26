@@ -1,4 +1,6 @@
 library(lubridate)
+library(tidyverse)
+
 source("function.R")
 
 cat(paste0("Leaning of today: ", today()), "\n", 
