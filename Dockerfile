@@ -14,8 +14,8 @@ RUN apt-get update
 RUN apt-get -y install cron rsyslog
 
 # Copy R scripts to Docker 
-COPY learning_today.R /root/learning_today
-COPY function.R /root/learning_today
+COPY learning_today.R /root/learning_today.R
+COPY function.R /root/function.R
 
 # Run the command on container startup and keep the container running as service
 CMD /usr/sbin/cron -f | service rsyslog restart
