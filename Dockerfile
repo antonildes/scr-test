@@ -53,7 +53,10 @@ RUN apt-get update -qq \
         jsonlite \
         foreach \
         doFuture \
-		mongolite \
+        twilio \ 
+        mongolite \
+	RMySQL \
+	DBI \
     && R -e "install.packages('aws.sns', repos = c('cloudyr' = 'http://cloudyr.github.io/drat'))" \
     && R -e "install.packages('aws.s3', repos = c('cloudyr' = 'http://cloudyr.github.io/drat'))"
 
