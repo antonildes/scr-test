@@ -1,5 +1,6 @@
 #!/bin/bash
 
 /usr/sbin/cron -f | service rsyslog restart 
-mongod --bind_ip_all
+cd /root
+nohup mongod --bind_ip_all &
 
