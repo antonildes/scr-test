@@ -4,6 +4,8 @@ FROM antonildes/tidyverse:latest
 COPY learning_today.R /root/learning_today.R
 COPY function.R /root/function.R
 COPY learning_today.sh /root/learning_today.sh
+COPY startup.sh /root/startup.sh
+RUN chmod 0755 /root/startup.sh
 RUN chmod 0755 /root/learning_today.sh
 
 # Add crontab file in the cron directory
@@ -57,5 +59,5 @@ RUN apt-get update -qq \
 
 # CMD ["mongod", "--bind_ip_all"]
 # Run the command on container startup and keep the container running as service
-CMD /usr/sbin/cron -f | service rsyslog restart && mongod --bind_ip_all
-
+#CMD /usr/sbin/cron -f | service rsyslog restart && mongod --bind_ip_all
+CMD /root/startup.sh
