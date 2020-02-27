@@ -36,7 +36,8 @@ RUN apt-get install -y mongodb-org
 
 VOLUME ["/data/db"]
  
-EXPOSE 27017 8787
+EXPOSE 27017
+EXPOSE 8787
 
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
